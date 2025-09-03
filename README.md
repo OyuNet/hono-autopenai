@@ -24,6 +24,11 @@ Flags:
 - `--entries` Glob(s) for source files (default: `src/**/*.ts`)
 - `--out` Output file (default: `openapi.json`)
 - `--root` or `--autoroutes` Path to autoroutes root (e.g. `src/routes`). When provided, any matched `route.ts` inside this folder will have its local paths prefixed with the folder structure. Example: `src/routes/users/route.ts` with `app.get('/:id', ...)` becomes `/users/:id`.
+- `--autorouter` Path to autorouter root (e.g. `src/app/(routes)`). File- and folder-based routing like Next.js:
+	- Folders form the base path.
+	- Dynamic segments: `[id]` -> `:id`, `[...slug]` -> `:slug`.
+	- `index.ts` contributes no segment, while `get.ts`/`post.ts`/etc. map methods but still need handlers discovered in code.
+	- The analyzer prefixes discovered Hono route paths with this base.
 
 ### Programmatic API
 
@@ -32,6 +37,24 @@ import { analyzeFilesToOpenAPI } from 'hono-autopenapi'
 
 const openapi = await analyzeFilesToOpenAPI(['src/**/*.ts'])
 console.log(JSON.stringify(openapi, null, 2))
+```
+
+With autoroutes/autorouter support:
+
+```ts
+import { analyzeToOpenAPI } from 'hono-autopenapi'
+
+// autoroutes (route.ts under folders)
+const openapiA = await analyzeToOpenAPI({
+	entries: 'src/routes/**/route.ts',
+	autoroutesRoot: 'src/routes',
+})
+
+// autorouter (folder-based like Next.js)
+const openapiB = await analyzeToOpenAPI({
+	entries: 'src/app/**/*.{ts,tsx}',
+	autorouterRoot: 'src/app',
+})
 ```
 
 ### Notes

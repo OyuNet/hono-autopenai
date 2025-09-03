@@ -6,11 +6,21 @@
   "module": "./dist/index.js",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./cli": {
+      "import": "./dist/cli.js"
+    }
+  },
   "bin": {
     "hono-autopenapi": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsup",
+    "prepare": "tsup",
     "dev": "tsup --watch",
     "check": "tsc --noEmit",
     "example": "node ./dist/cli.js --entries examples/**/*.ts --out openapi.json"
@@ -23,7 +33,20 @@
     "json-schema"
   ],
   "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OyuNet/hono-autopenapi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OyuNet/hono-autopenapi/issues"
+  },
+  "homepage": "https://github.com/OyuNet/hono-autopenapi#readme",
   "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
     "@types/bun": "latest",
     "hono": "^4.5.0",
