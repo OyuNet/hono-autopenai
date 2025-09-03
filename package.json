@@ -1,6 +1,6 @@
 {
   "name": "hono-autopenapi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate OpenAPI schema by statically analyzing Hono routes and c.json response types.",
   "type": "module",
   "module": "./dist/index.js",
