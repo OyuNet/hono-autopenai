@@ -1,0 +1,40 @@
+{
+  "name": "hono-autopenapi",
+  "version": "0.1.0",
+  "description": "Generate OpenAPI schema by statically analyzing Hono routes and c.json response types.",
+  "type": "module",
+  "module": "./dist/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "hono-autopenapi": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "check": "tsc --noEmit",
+    "example": "node ./dist/cli.js --entries examples/**/*.ts --out openapi.json"
+  },
+  "keywords": [
+    "hono",
+    "openapi",
+    "typescript",
+    "static-analysis",
+    "json-schema"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "hono": "^4.5.0",
+    "openapi-types": "^12.1.3",
+    "tsup": "^8.2.4",
+    "typescript": "^5.6.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.2"
+  }
+}
